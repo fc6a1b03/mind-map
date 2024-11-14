@@ -1,9 +1,8 @@
 FROM node:16 AS builder
 WORKDIR /usr/src
 COPY . .
-RUN npm i yarn -g
-RUN cd simple-mind-map && yarn && yarn link
-RUN cd web && yarn && yarn link simple-mind-map && yarn run build
+RUN cd simple-mind-map && npm i && npm link
+RUN cd web && npm i && npm link simple-mind-map && npm run build
 
 # =============================================================
 
