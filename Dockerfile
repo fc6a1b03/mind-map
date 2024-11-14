@@ -1,5 +1,5 @@
-FROM nginx
-RUN mkdir /app
-COPY ./index.html /app/
-COPY ./dist /app/dist/
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM caddy:alpine
+WORKDIR /usr/share/caddy
+COPY index.html dist ./
+COPY Caddyfile /etc/caddy/Caddyfile
+EXPOSE 80
