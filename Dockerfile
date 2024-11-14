@@ -10,7 +10,7 @@ FROM caddy:alpine
 WORKDIR /usr/share/caddy
 # COPY --from=builder /usr/src/dist .
 # COPY --from=builder /usr/src/index.html .
-COPY dist .
+COPY dist ./dist
 COPY index.html .
 COPY Caddyfile /etc/caddy/Caddyfile
 EXPOSE 80
