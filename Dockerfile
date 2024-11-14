@@ -1,4 +1,4 @@
-FROM node:14-alpine AS build
+FROM node:16-alpine AS build
 WORKDIR /app
 RUN cd simple-mind-map && npm i && npm link
 RUN cd web && npm i && npm link simple-mind-map
