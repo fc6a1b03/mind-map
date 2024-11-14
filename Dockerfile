@@ -1,9 +1,8 @@
 FROM node:16 AS build
 WORKDIR /build
-COPY simple-mind-map web .
-RUN ls -lh
-RUN cd simple-mind-map && npm i && npm link
-RUN cd web && npm i && npm link simple-mind-map && npm run build
+COPY simple-mind-map web /build/
+RUN cd /build/simple-mind-map && npm i && npm link
+RUN cd /build/web && npm i && npm link simple-mind-map && npm run build
 
 # =============================================================
 
