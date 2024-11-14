@@ -1,7 +1,7 @@
 FROM node:16 AS builder
 WORKDIR /usr/src
 COPY . .
-RUN npm install -g yarn
+RUN npm i -g yarn
 RUN cd simple-mind-map && yarn && yarn link
 RUN cd web && yarn && yarn link simple-mind-map && yarn run build
 
