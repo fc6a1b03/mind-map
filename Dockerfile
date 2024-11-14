@@ -1,8 +1,8 @@
 FROM node:16 AS builder
 WORKDIR /usr/src
 COPY . .
-RUN cd simple-mind-map && npm npm ci && npm link
-RUN cd web && npm npm ci && npm link simple-mind-map && npm run build
+RUN cd simple-mind-map && npm ci && npm link
+RUN cd web && npm ci && npm link simple-mind-map && npm run build
 
 # =============================================================
 
