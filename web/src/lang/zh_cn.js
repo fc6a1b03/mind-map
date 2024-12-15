@@ -121,6 +121,7 @@ export default {
     copyFail: '复制失败',
     number: '编号其子节点',
     expandNodeChild: '展开所有下级节点',
+    unExpandNodeChild: '收起所有下级节点',
     addToDo: '添加待办',
     removeToDo: '删除待办'
   },
@@ -248,7 +249,12 @@ export default {
     arrowDir: '箭头位置',
     arrowDirStart: '头部',
     arrowDirEnd: '尾部',
-    direction: '方向'
+    direction: '方向',
+    selectNodeTip: '请选择一个节点',
+    openLineFlow: '开启流动效果',
+    lineFlowDuration: '一个流动周期的时间',
+    forward: '正向',
+    reverse: '反向'
   },
   theme: {
     title: '主题',

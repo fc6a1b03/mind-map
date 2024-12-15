@@ -6,6 +6,7 @@ import {
 import MersenneTwister from './mersenneTwister'
 import { ForeignObject } from '@svgdotjs/svg.js'
 import merge from 'deepmerge'
+import { lineStyleProps } from '../theme/default'
 
 //  深度优先遍历树
 export const walk = (
@@ -507,13 +508,14 @@ export const addHtmlStyle = (html, tag, style) => {
   if (!addHtmlStyleEl) {
     addHtmlStyleEl = document.createElement('div')
   }
+  const tags = Array.isArray(tag) ? tag : [tag]
   addHtmlStyleEl.innerHTML = html
   let walk = root => {
     let childNodes = root.childNodes
     childNodes.forEach(node => {
       if (node.nodeType === 1) {
         // 元素节点
-        if (node.tagName.toLowerCase() === tag) {
+        if (tags.includes(node.tagName.toLowerCase())) {
           node.style.cssText = style
         } else {
           walk(node)
@@ -788,6 +790,18 @@ export const checkIsNodeStyleDataKey = key => {
     return true
   }
   return false
+}
+
+// 判断一个对象是否不需要触发节点重新创建
+export const isNodeNotNeedRenderData = config => {
+  const list = [...lineStyleProps] // 节点连线样式
+  const keys = Object.keys(config)
+  for (let i = 0; i < keys.length; i++) {
+    if (!list.includes(keys[i])) {
+      return false
+    }
+  }
+  return true
 }
 
 // 合并图标数组
@@ -1069,9 +1083,14 @@ export const isSameObject = (a, b) => {
   }
 }
 
+// 检查navigator.clipboard对象的读取是否可用
+export const checkClipboardReadEnable = () => {
+  return navigator.clipboard && typeof navigator.clipboard.read === 'function'
+}
+
 // 将数据设置到用户剪切板中
 export const setDataToClipboard = data => {
-  if (navigator.clipboard) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(JSON.stringify(data))
   }
 }
@@ -1080,7 +1099,7 @@ export const setDataToClipboard = data => {
 export const getDataFromClipboard = async () => {
   let text = null
   let img = null
-  if (navigator.clipboard) {
+  if (checkClipboardReadEnable()) {
     const items = await navigator.clipboard.read()
     if (items && items.length > 0) {
       for (const clipboardItem of items) {

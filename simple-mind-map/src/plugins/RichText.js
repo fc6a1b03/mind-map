@@ -57,6 +57,14 @@ class RichText {
     this.isCompositing = false
     this.textNodePaddingX = 6
     this.textNodePaddingY = 4
+    this.supportStyleProps = [
+      'fontFamily',
+      'fontSize',
+      'fontWeight',
+      'fontStyle',
+      'textDecoration',
+      'color'
+    ]
     this.initOpt()
     this.extendQuill()
     this.appendCss()
@@ -73,9 +81,12 @@ class RichText {
     this.onCompositionStart = this.onCompositionStart.bind(this)
     this.onCompositionUpdate = this.onCompositionUpdate.bind(this)
     this.onCompositionEnd = this.onCompositionEnd.bind(this)
+    this.handleSetData = this.handleSetData.bind(this)
     window.addEventListener('compositionstart', this.onCompositionStart)
     window.addEventListener('compositionupdate', this.onCompositionUpdate)
     window.addEventListener('compositionend', this.onCompositionEnd)
+    this.mindMap.on('before_update_data', this.handleSetData)
+    this.mindMap.on('before_set_data', this.handleSetData)
   }
 
   // 解绑事件
@@ -83,6 +94,8 @@ class RichText {
     window.removeEventListener('compositionstart', this.onCompositionStart)
     window.removeEventListener('compositionupdate', this.onCompositionUpdate)
     window.removeEventListener('compositionend', this.onCompositionEnd)
+    this.mindMap.off('before_update_data', this.handleSetData)
+    this.mindMap.off('before_set_data', this.handleSetData)
   }
 
   // 插入样式
@@ -92,6 +105,7 @@ class RichText {
       `
       .smm-richtext-node-wrap {
         word-break: break-all;
+        user-select: none;
       }
 
       .smm-richtext-node-wrap p {
@@ -100,7 +114,7 @@ class RichText {
       `
     )
     let cssText = `
-      .ql-editor {
+      .${CONSTANTS.EDIT_NODE_CLASS.RICH_TEXT_EDIT_WRAP} {
         overflow: hidden;
         padding: 0;
         height: auto;
@@ -188,7 +202,8 @@ class RichText {
       textAutoWrapWidth,
       selectTextOnEnterEditText,
       transformRichTextOnEnterEdit,
-      openRealtimeRenderOnNodeTextEdit
+      openRealtimeRenderOnNodeTextEdit,
+      autoEmptyTextWhenKeydownEnterEdit
     } = this.mindMap.opt
     textAutoWrapWidth = node.hasCustomWidth()
       ? node.customTextWidth
@@ -205,8 +220,8 @@ class RichText {
     let originWidth = g.attr('data-width')
     let originHeight = g.attr('data-height')
     // 缩放值
-    let scaleX = rect.width / originWidth
-    let scaleY = rect.height / originHeight
+    const scaleX = Math.ceil(rect.width) / originWidth
+    const scaleY = Math.ceil(rect.height) / originHeight
     // 内边距
     let paddingX = this.textNodePaddingX
     let paddingY = this.textNodePaddingY
@@ -219,14 +234,14 @@ class RichText {
       this.textEditNode = document.createElement('div')
       this.textEditNode.classList.add('smm-richtext-node-edit-wrap')
       this.textEditNode.style.cssText = `
-        position:fixed; 
-        box-sizing: border-box; 
+        position:fixed;
+        box-sizing: border-box;
         ${
           openRealtimeRenderOnNodeTextEdit
             ? ''
             : 'box-shadow: 0 0 20px rgba(0,0,0,.5);'
         }
-        outline: none; 
+        outline: none;
         word-break: break-all;
         padding: ${paddingY}px ${paddingX}px;
       `
@@ -279,7 +294,10 @@ class RichText {
     if (isEmptyText) {
       this.lostStyle = true
     }
-    if (noneEmptyNoneRichText) {
+    if (isFromKeyDown && autoEmptyTextWhenKeydownEnterEdit) {
+      this.textEditNode.innerHTML = ''
+      this.lostStyle = true
+    } else if (noneEmptyNoneRichText) {
       // 还不是富文本
       let text = String(nodeText).split(/\n/gim).join('<br>')
       let html = `<p>${text}</p>`
@@ -289,7 +307,9 @@ class RichText {
       this.textEditNode.innerHTML = this.cacheEditingText || nodeText
     }
     this.initQuillEditor()
-    document.querySelector('.ql-editor').style.minHeight = originHeight + 'px'
+    document.querySelector(
+      '.' + CONSTANTS.EDIT_NODE_CLASS.RICH_TEXT_EDIT_WRAP
+    ).style.minHeight = originHeight + 'px'
     this.showTextEdit = true
     // 如果是刚创建的节点，那么默认全选，否则普通激活不全选，除非selectTextOnEnterEditText配置为true
     // 在selectTextOnEnterEditText时，如果是在keydown事件进入的节点编辑，也不需要全选
@@ -355,13 +375,16 @@ class RichText {
 
   // 获取当前正在编辑的内容
   getEditText() {
-    let html = this.quill.container.firstChild.innerHTML
+    // https://github.com/slab/quill/issues/4509
+    return this.quill.container.firstChild.innerHTML.replaceAll(/  +/g, match =>
+      '&nbsp;'.repeat(match.length)
+    )
     // 去除ql-cursor节点
     // https://github.com/wanglin2/mind-map/commit/138cc4b3e824671143f0bf70e5c46796f48520d0
     // https://github.com/wanglin2/mind-map/commit/0760500cebe8ec4e8ad84ab63f877b8b2a193aa1
     // html = removeHtmlNodeByClass(html, '.ql-cursor')
     // 去除最后的空行
-    return html.replace(/<p><br><\/p>$/, '')
+    // return html.replace(/<p><br><\/p>$/, '')
   }
 
   // 给html字符串中的节点样式按样式名首字母排序
@@ -463,6 +486,17 @@ class RichText {
           }
         }
       },
+      formats: [
+        'bold',
+        'italic',
+        'underline',
+        'strike',
+        'color',
+        'background',
+        'font',
+        'size',
+        'formula'
+      ], // 明确指定允许的格式，不包含有序列表，无序列表等
       theme: 'snow'
     })
     // 拦截复制事件，即Ctrl + c，去除多余的空行
@@ -655,14 +689,7 @@ class RichText {
     // 再将样式恢复为当前主题改节点的默认样式
     const style = {}
     if (this.node) {
-      ;[
-        'fontFamily',
-        'fontSize',
-        'fontWeight',
-        'fontStyle',
-        'textDecoration',
-        'color'
-      ].forEach(key => {
+      this.supportStyleProps.forEach(key => {
         style[key] = this.node.style.merge(key)
       })
     }
@@ -693,14 +720,7 @@ class RichText {
     if (!this.node) return
     if (clear) {
       // 清除文本样式
-      ;[
-        'fontFamily',
-        'fontSize',
-        'fontWeight',
-        'fontStyle',
-        'textDecoration',
-        'color'
-      ].forEach(prop => {
+      this.supportStyleProps.forEach(prop => {
         delete this.node.nodeData.data[prop]
       })
     } else {
@@ -775,6 +795,18 @@ class RichText {
     return data
   }
 
+  // 判断一个对象是否包含了富文本支持的样式字段
+  isHasRichTextStyle(obj) {
+    const keys = Object.keys(obj)
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i]
+      if (this.supportStyleProps.includes(key)) {
+        return true
+      }
+    }
+    return false
+  }
+
   // 给未激活的节点设置富文本样式
   setNotActiveNodeStyle(node, style) {
     const config = this.normalStyleToRichTextStyle(style)
@@ -787,17 +819,9 @@ class RichText {
 
   // 检查指定节点是否存在自定义的富文本样式
   checkNodeHasCustomRichTextStyle(node) {
-    const list = [
-      'fontFamily',
-      'fontSize',
-      'fontWeight',
-      'fontStyle',
-      'textDecoration',
-      'color'
-    ]
     const nodeData = node instanceof MindMapNode ? node.getData() : node
-    for (let i = 0; i < list.length; i++) {
-      if (nodeData[list[i]] !== undefined) {
+    for (let i = 0; i < this.supportStyleProps.length; i++) {
+      if (nodeData[this.supportStyleProps[i]] !== undefined) {
         return true
       }
     }

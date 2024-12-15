@@ -44,7 +44,7 @@ Github：[releases](https://github.com/wanglin2/mind-map/releases)。百度云�
 
 官方提供了如下插件，可根据需求按需引入（某个功能不生效大概率是因为你没有引入对应的插件），具体使用方式请查看文档：
 
-> RichText（节点富文本插件）、Select（鼠标多选节点插件）、Drag（节点拖拽插件）、AssociativeLine（关联线插件）、Export（导出插件）、KeyboardNavigation（键盘导航插件）、MiniMap（小地图插件）、Watermark（水印插件）、TouchEvent（移动端触摸事件支持插件）、NodeImgAdjust（拖拽调整节点图片大小插件）、Search（搜索插件）、Painter（节点格式刷插件）、Scrollbar（滚动条插件）、Formula（数学公式插件）、Cooperate（协同编辑插件）、RainbowLines（彩虹线条插件）、Demonstrate（演示模式插件）、OuterFrame（外框插件）、HandDrawnLikeStyle（手绘风格插件）[收费]、Notation（节点标记插件）[收费]、Numbers（节点编号插件）[收费]、Freemind（Freemind格式导入导出插件）[收费]、Excel（Excel格式导入导出插件）[收费]、Checkbox（待办插件）[收费]
+> RichText（节点富文本插件）、Select（鼠标多选节点插件）、Drag（节点拖拽插件）、AssociativeLine（关联线插件）、Export（导出插件）、KeyboardNavigation（键盘导航插件）、MiniMap（小地图插件）、Watermark（水印插件）、TouchEvent（移动端触摸事件支持插件）、NodeImgAdjust（拖拽调整节点图片大小插件）、Search（搜索插件）、Painter（节点格式刷插件）、Scrollbar（滚动条插件）、Formula（数学公式插件）、Cooperate（协同编辑插件）、RainbowLines（彩虹线条插件）、Demonstrate（演示模式插件）、OuterFrame（外框插件）、MindMapLayoutPro（思维导图布局插件）、HandDrawnLikeStyle（手绘风格插件）[收费]、Notation（节点标记插件）[收费]、Numbers（节点编号插件）[收费]、Freemind（Freemind格式导入导出插件）[收费]、Excel（Excel格式导入导出插件）[收费]、Checkbox（待办插件）[收费]、Lineflow（节点连线流动插件）[收费]
 
 本项目不会实现的特性：
 
@@ -93,13 +93,11 @@ const mindMap = new MindMap({
 });
 ```
 
-即可得到一个思维导图。
-
-想要实现更多功能？可以查看[开发文档](https://wanglin2.github.io/mind-map-docs/)。
+即可得到一个思维导图。想要实现更多功能？可以查看[开发文档](https://wanglin2.github.io/mind-map-docs/)。
 
 # License
 
-[MIT](./LICENSE)。保留`mind-map`版权声明的情况下可随意商用。如不想保留可联系作者。
+[MIT](./LICENSE)。保留`mind-map`版权声明的情况下可随意商用，如不想保留可联系作者。
 
 # 微信交流群
 
@@ -117,18 +115,118 @@ const mindMap = new MindMap({
 
 # 请作者喝杯咖啡
 
-开源不易，如果本项目有帮助到你的话，可以考虑请作者喝杯咖啡~
+开源不易，如果本项目有帮助到你的话，可以考虑请作者喝杯咖啡~你的赞助对项目的可持续发展非常重要，是作者持续维护的最大动力。
 
 > 推荐使用支付宝，微信获取不到头像。转账请备注【思维导图】。
 >
 > 也可以通过购买付费插件来支持我们：[付费插件](https://wanglin2.github.io/mind-map-docs/plugins/about.html)。
 >
-> 为什么需要你的赞助：simple-mind-map 的目标是成为开源中最好的思维导图，为开发者提供一个快速实现思维导图产品的js库，为用户提供一个免费好用的思维导图软件，为了这个目标，作者已经持续开发维护了3年多，耗费了非常多的精力，随着时间的推移，simple-mind-map 已经取得了一定的成绩，相比最初，无论是功能，还是体验都已经有了翻天覆地的改变，但是收益方面却可以忽略不计，因为 simple-mind-map 是采用 MIT 许可的开源项目，永久免费，保留版权下可随意商用，这也意味着很难直接通过项目获取收益，为爱发电的激情总会慢慢消退，所以你的赞助对项目的可持续发展非常重要，是作者持续维护的最大动力。
+> 赞助等级：最强王者（￥500+）、星耀赞助（￥300+）、钻石赞助（￥150+）、黄金赞助（￥50+）、青铜赞助
 
 <p>
   <img src="./web/src/assets/img/alipay.jpg" style="width: 300px" />
   <img src="./web/src/assets/img/wechat.jpg" style="width: 300px" />
 </p>
+
+## 钻石赞助
+
+<p>
+    <span>
+        <img src="./web/src/assets/avatar/黄智彪@一米一栗科技.png" style="width: 50px;height: 50px;" />
+        <span>黄智彪@一米一栗科技</span>
+    </span>
+</p>
+
+## 黄金赞助
+
+<p>
+    <span>
+        <img src="./web/src/assets/avatar/小土渣的宇宙.jpeg" style="width: 50px;height: 50px;" />
+        <span>小土渣的宇宙</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/Chris.jpg" style="width: 50px;height: 50px;" />
+        <span>Chris</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/仓鼠.jpg" style="width: 50px;height: 50px;" />
+        <span>仓鼠</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/风格.jpg" style="width: 50px;height: 50px;" />
+        <span>风格</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
+        <span>LiuJL</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/Kyle.jpg" style="width: 50px;height: 50px;" />
+        <span>Kyle</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/秀树因馨雨.jpg" style="width: 50px;height: 50px;" />
+        <span>秀树因馨雨</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
+        <span>黄泳</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/ccccs.jpg" style="width: 50px;height: 50px;" />
+        <span>ccccs</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/炫.jpg" style="width: 50px;height: 50px;" />
+        <span>炫</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
+        <span>晏江</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/梁辉.jpg" style="width: 50px;height: 50px;" />
+        <span>梁辉</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/千帆.jpg" style="width: 50px;height: 50px;" />
+        <span>千帆</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/布林.jpg" style="width: 50px;height: 50px;" />
+        <span>布林</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/达仁科技.jpg" style="width: 50px;height: 50px;" />
+        <span>达仁科技</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/沐风牧草.jpg" style="width: 50px;height: 50px;" />
+        <span>沐风牧草</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/俊奇.jpg" style="width: 50px;height: 50px;" />
+        <span>俊奇</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/庆国.jpg" style="width: 50px;height: 50px;" />
+        <span>庆国</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
+        <span>Matt</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/雨馨.jpg" style="width: 50px;height: 50px;" />
+        <span>雨馨</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/峰.jpg" style="width: 50px;height: 50px;" />
+        <span>峰</span>
+    </span>
+</p>
+
+## 青铜赞助
 
 <p>
     <span>
@@ -138,10 +236,6 @@ const mindMap = new MindMap({
     <span>
         <img src="./web/src/assets/avatar/志斌.jpg" style="width: 50px;height: 50px;" />
         <span>志斌</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/小土渣的宇宙.jpeg" style="width: 50px;height: 50px;" />
-        <span>小土渣的宇宙</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/qp.jpg" style="width: 50px;height: 50px;" />
@@ -160,20 +254,8 @@ const mindMap = new MindMap({
         <span>suka</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/Chris.jpg" style="width: 50px;height: 50px;" />
-        <span>Chris</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/水车.jpg" style="width: 50px;height: 50px;" />
         <span>水车</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/仓鼠.jpg" style="width: 50px;height: 50px;" />
-        <span>仓鼠</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/千帆.jpg" style="width: 50px;height: 50px;" />
-        <span>千帆</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/才镇.jpg" style="width: 50px;height: 50px;" />
@@ -192,10 +274,6 @@ const mindMap = new MindMap({
         <span>Luke</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/布林.jpg" style="width: 50px;height: 50px;" />
-        <span>布林</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/南风.jpg" style="width: 50px;height: 50px;" />
         <span>南风</span>
     </span>
@@ -212,20 +290,12 @@ const mindMap = new MindMap({
         <span>敏</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/沐风牧草.jpg" style="width: 50px;height: 50px;" />
-        <span>沐风牧草</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/有希.jpg" style="width: 50px;height: 50px;" />
         <span>有希</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/樊笼.jpg" style="width: 50px;height: 50px;" />
         <span>樊笼</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/达仁科技.jpg" style="width: 50px;height: 50px;" />
-        <span>达仁科技</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/小逗比.png" style="width: 50px;height: 50px;" />
@@ -304,10 +374,6 @@ const mindMap = new MindMap({
         <span>旭东</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/俊奇.jpg" style="width: 50px;height: 50px;" />
-        <span>俊奇</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/橘半.jpg" style="width: 50px;height: 50px;" />
         <span>橘半</span>
     </span>
@@ -320,20 +386,12 @@ const mindMap = new MindMap({
         <span>皇登攀</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/风格.jpg" style="width: 50px;height: 50px;" />
-        <span>风格</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
         <span>SR</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/逆水行舟.jpg" style="width: 50px;height: 50px;" />
         <span>逆水行舟</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
-        <span>LiuJL</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/L.jpg" style="width: 50px;height: 50px;" />
@@ -360,10 +418,6 @@ const mindMap = new MindMap({
         <span>铁</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/庆国.jpg" style="width: 50px;height: 50px;" />
-        <span>庆国</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/Alex.jpg" style="width: 50px;height: 50px;" />
         <span>Alex</span>
     </span>
@@ -380,16 +434,8 @@ const mindMap = new MindMap({
         <span>最多5个字</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/雨馨.jpg" style="width: 50px;height: 50px;" />
-        <span>雨馨</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/ZX.jpg" style="width: 50px;height: 50px;" />
         <span>ZX</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/峰.jpg" style="width: 50px;height: 50px;" />
-        <span>峰</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
@@ -404,16 +450,8 @@ const mindMap = new MindMap({
         <span>好名字</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/Kyle.jpg" style="width: 50px;height: 50px;" />
-        <span>Kyle</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/lsytyrt.jpg" style="width: 50px;height: 50px;" />
         <span>lsytyrt</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/秀树因馨雨.jpg" style="width: 50px;height: 50px;" />
-        <span>秀树因馨雨</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/buddy.jpg" style="width: 50px;height: 50px;" />
@@ -436,14 +474,6 @@ const mindMap = new MindMap({
         <span>晴空</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
-        <span>黄泳</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/ccccs.jpg" style="width: 50px;height: 50px;" />
-        <span>ccccs</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/。.png" style="width: 50px;height: 50px;" />
         <span>。</span>
     </span>
@@ -456,20 +486,12 @@ const mindMap = new MindMap({
         <span>张文建</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/炫.jpg" style="width: 50px;height: 50px;" />
-        <span>炫</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/Lawliet.jpg" style="width: 50px;height: 50px;" />
         <span>Lawliet</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/一叶孤舟.jpg" style="width: 50px;height: 50px;" />
         <span>一叶孤舟</span>
-    </span>
-    <span>
-        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
-        <span>晏江</span>
     </span>
     <span>
         <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
@@ -484,10 +506,6 @@ const mindMap = new MindMap({
         <span>中文网字计划-江夏尧</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/梁辉.jpg" style="width: 50px;height: 50px;" />
-        <span>梁辉</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/海云.jpg" style="width: 50px;height: 50px;" />
         <span>海云</span>
     </span>
@@ -500,10 +518,6 @@ const mindMap = new MindMap({
         <span>h.r.w</span>
     </span>
     <span>
-        <img src="./web/src/assets/avatar/default.png" style="width: 50px;height: 50px;" />
-        <span>Matt</span>
-    </span>
-    <span>
         <img src="./web/src/assets/avatar/时光匆匆.png" style="width: 50px;height: 50px;" />
         <span>时光匆匆</span>
     </span>
@@ -514,5 +528,17 @@ const mindMap = new MindMap({
     <span>
         <img src="./web/src/assets/avatar/一亩三.jpg" style="width: 50px;height: 50px;" />
         <span>一亩三</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/xbkkjbs0246658.png" style="width: 50px;height: 50px;" />
+        <span>xbkkjbs0246658</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/4399行星元帅.jpg" style="width: 50px;height: 50px;" />
+        <span>4399行星元帅</span>
+    </span>
+    <span>
+        <img src="./web/src/assets/avatar/Xavier.png" style="width: 50px;height: 50px;" />
+        <span>Xavier</span>
     </span>
 </p>

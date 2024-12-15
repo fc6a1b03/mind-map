@@ -124,6 +124,20 @@ function createIconNode() {
   })
 }
 
+// 尝试给html指定标签添加内联样式
+function tryAddHtmlStyle(text, style) {
+  const tagList = ['span', 'strong', 's', 'em', 'u']
+  // let _text = text
+  // for (let i = 0; i < tagList.length; i++) {
+  //   text = addHtmlStyle(text, tagList[i], style)
+  //   if (text !== _text) {
+  //     break
+  //   }
+  // }
+  // return text
+  return addHtmlStyle(text, tagList, style)
+}
+
 // 创建富文本节点
 function createRichTextNode(specifyText) {
   const hasCustomWidth = this.hasCustomWidth()
@@ -140,25 +154,22 @@ function createRichTextNode(specifyText) {
   }
   if ([CONSTANTS.CHANGE_THEME].includes(this.mindMap.renderer.renderSource)) {
     // 如果自定义过样式则不允许覆盖
-    if (!this.hasCustomStyle()) {
-      recoverText = true
-    }
+    // if (!this.hasCustomStyle() ) {
+    recoverText = true
+    // }
   }
   if (recoverText && !isUndef(text)) {
     // 判断节点内容是否是富文本
-    let isRichText = checkIsRichText(text)
+    const isRichText = checkIsRichText(text)
+    // 获取自定义样式
+    const customStyle = this.style.getCustomStyle()
     // 样式字符串
-    let style = this.style.createStyleText()
+    const style = this.style.createStyleText(customStyle)
     if (isRichText) {
       // 如果是富文本那么线移除内联样式
       text = removeHtmlStyle(text)
       // 再添加新的内联样式
-      let _text = text
-      text = addHtmlStyle(text, 'span', style)
-      // 给span添加样式没有成功，则尝试给strong标签添加样式
-      if (text === _text) {
-        text = addHtmlStyle(text, 'strong', style)
-      }
+      text = this.tryAddHtmlStyle(text, style)
     } else {
       // 非富文本
       text = `<p><span style="${style}">${text}</span></p>`
@@ -259,9 +270,15 @@ function createTextNode(specifyText) {
     }
     textArr[index] = lines.join('\n')
   })
-  textArr = textArr.join('\n').split(/\n/gim)
+  textArr = textArr.join('\n').replace(/\n$/g, '').split(/\n/gim)
   textArr.forEach((item, index) => {
-    let node = new Text().text(item)
+    // 避免尾部的空行不占宽度
+    // 同时解决该问题：https://github.com/wanglin2/mind-map/issues/1037
+    if (item === '') {
+      item = '﻿'
+    }
+    const node = new Text().text(item)
+    node.addClass('smm-text-node-wrap')
     this.style.text(node)
     node.y(
       fontSize * noneRichTextNodeLineHeight * index +
@@ -453,6 +470,9 @@ function createNoteNode() {
   node.on('click', e => {
     this.mindMap.emit('node_note_click', this, e, node)
   })
+  node.on('dblclick', e => {
+    this.mindMap.emit('node_note_dblclick', this, e, node)
+  })
   return {
     node,
     width: iconSize,
@@ -536,6 +556,7 @@ export default {
   createImgNode,
   getImgShowSize,
   createIconNode,
+  tryAddHtmlStyle,
   createRichTextNode,
   createTextNode,
   createHyperlinkNode,
