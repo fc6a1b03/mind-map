@@ -47,6 +47,8 @@
       v-if="mindMap"
       :mindMap="mindMap"
     ></NodeImgPlacementToolbar>
+    <AiCreate v-if="mindMap && enableAi" :mindMap="mindMap"></AiCreate>
+    <AiChat v-if="enableAi"></AiChat>
     <div
       class="dragMask"
       v-if="showDragMask"
@@ -85,14 +87,14 @@ import Themes from 'simple-mind-map-plugin-themes'
 // 协同编辑插件
 // import Cooperate from 'simple-mind-map/src/plugins/Cooperate.js'
 // 以下插件为付费插件，详情请查看开发文档。依次为：手绘风格插件、标记插件、编号插件、Freemind软件格式导入导出插件、Excel软件格式导入导出插件、待办插件、节点连线流动效果插件、动量效果插件
-// import HandDrawnLikeStyle from 'simple-mind-map-plugin-handdrawnlikestyle'
-// import Notation from 'simple-mind-map-plugin-notation'
-// import Numbers from 'simple-mind-map-plugin-numbers'
-// import Freemind from 'simple-mind-map-plugin-freemind'
-// import Excel from 'simple-mind-map-plugin-excel'
-// import Checkbox from 'simple-mind-map-plugin-checkbox'
-// import LineFlow from 'simple-mind-map-plugin-lineflow'
-// import Momentum from 'simple-mind-map-plugin-momentum'
+import HandDrawnLikeStyle from 'simple-mind-map-plugin-handdrawnlikestyle'
+import Notation from 'simple-mind-map-plugin-notation'
+import Numbers from 'simple-mind-map-plugin-numbers'
+import Freemind from 'simple-mind-map-plugin-freemind'
+import Excel from 'simple-mind-map-plugin-excel'
+import Checkbox from 'simple-mind-map-plugin-checkbox'
+import LineFlow from 'simple-mind-map-plugin-lineflow'
+import Momentum from 'simple-mind-map-plugin-momentum'
 // npm link simple-mind-map-plugin-excel simple-mind-map-plugin-freemind simple-mind-map-plugin-numbers simple-mind-map-plugin-notation simple-mind-map-plugin-handdrawnlikestyle simple-mind-map-plugin-checkbox simple-mind-map simple-mind-map-plugin-themes simple-mind-map-plugin-lineflow simple-mind-map-plugin-momentum
 import OutlineSidebar from './OutlineSidebar'
 import Style from './Style'
@@ -109,7 +111,7 @@ import { getData, storeData, storeConfig } from '@/api'
 import Navigator from './Navigator.vue'
 import NodeImgPreview from './NodeImgPreview.vue'
 import SidebarTrigger from './SidebarTrigger.vue'
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import icon from '@/config/icon'
 import CustomNodeContent from './CustomNodeContent.vue'
 import Color from './Color.vue'
@@ -133,6 +135,8 @@ import NodeTagStyle from './NodeTagStyle.vue'
 import Setting from './Setting.vue'
 import AssociativeLineStyle from './AssociativeLineStyle.vue'
 import NodeImgPlacementToolbar from './NodeImgPlacementToolbar.vue'
+import AiCreate from './AiCreate.vue'
+import AiChat from './AiChat.vue'
 
 // 注册插件
 MindMap.usePlugin(MiniMap)
@@ -187,7 +191,9 @@ export default {
     NodeTagStyle,
     Setting,
     AssociativeLineStyle,
-    NodeImgPlacementToolbar
+    NodeImgPlacementToolbar,
+    AiCreate,
+    AiChat
   },
   data() {
     return {
@@ -211,7 +217,8 @@ export default {
         state.localConfig.isUseHandDrawnLikeStyle,
       isUseMomentum: state => state.localConfig.isUseMomentum,
       extraTextOnExport: state => state.extraTextOnExport,
-      isDragOutlineTreeNode: state => state.isDragOutlineTreeNode
+      isDragOutlineTreeNode: state => state.isDragOutlineTreeNode,
+      enableAi: state => state.localConfig.enableAi
     })
   },
   watch: {
